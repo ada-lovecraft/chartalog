@@ -1,0 +1,111 @@
+{% extends '../layouts/default.html' %}
+
+{% block content %}
+	<div class="row" ng-controller="ChartController">
+		<p>{{$parent.chartOptions | json}}</p>
+		<tabset type="'pills'">
+			<tab heading="Designer">
+				<div class="row">
+					<div class="col-md-8">
+						<accordion>
+							<accordion-group heading="Chart Preview" is-open="true">
+								<div ng-include src="'chart-content'"></div>
+							</accordion-group>
+						</accordion>
+					</div>
+					<div class="col-md-4">
+						<accordion close-others="true">
+							<accordion-group is-open="true" class="no-padding" ng-repeat="optSet in chartOptions">
+								<accordion-heading>{{optSet.name || 'broken...'}}</accordion-heading>
+								<div ng-include src="'option-content'" ng-init="options = optSet.data"></div>
+								
+							</accordion-group>
+
+						</accordion>
+					</div>
+				</div>
+			</tab>
+
+			<tab heading="Chart Info">
+				title and accompanying post should go here
+			</tab>
+
+			<tab heading="Data">
+				<div class="container">
+					<div class="row">
+						<div class="btn-group">
+							<button type="button" class="btn btn-primary" ng-model="dataSource" btn-radio="'CSV'">CSV</button>
+							<button type="button" class="btn btn-primary" ng-model="dataSource" btn-radio="'TSV'">TSV</button>
+							<button type="button" class="btn btn-primary" ng-model="dataSource" btn-radio="'Excel'">Excel</button>
+							<button type="button" class="btn btn-primary" ng-model="dataSource" btn-radio="'JSON'">JSON</button>
+							<button type="button" class="btn btn-primary" ng-model="dataSource" btn-radio="'Upload'">Upload...</button>
+							<button type="button" class="btn btn-primary" ng-model="dataSource" btn-radio="'External'">External link...</button>
+						</div>					
+					</div>
+					<div class="row">
+						<textarea ng-model="chartJSON" class="textarea form-control"></textarea>
+					</div>
+				</div>
+			</tab>
+
+		</tabset>
+	</div>
+
+	<script type="text/ng-template" id="chart-content">
+		<input type="text" ng-model="chart['X: Label']" />
+		<nvd3-line-chart
+			data="chartData"
+			showXAxis="true"
+			showYAxis="chart[conversionChart.showYAxis]"
+			tooltips="true"
+			interactive="true"
+			xAxisLabel="{{chart['X: Label']}}"
+			no-data="No data available."
+		>
+		</nvd3-line-chart>
+	</script>
+
+	<script type="text/ng-template" id="option-content">
+		<table class="table table-striped">
+			<tr 
+				ng-repeat="option in options" 
+				ng-show="isVisible(option.depends,option.dependsValue)"
+				>
+				<td>
+					<span class="option-title" ng-bind="option.name"></span>
+				</td>
+				<td 
+					ng-switch 
+					on="option.type"
+					>
+					<input type="text" 
+						class="form-control" 
+						ng-model="chart[option.name]"
+						ng-switch-when="text"  
+						ng-placeholder="option.name" 
+						/>
+
+					<input type="checkbox" 
+						bs-switch 
+						ng-model="chart[option.name]" 
+						ng-switch-when="check"
+						switch-off="danger"
+						switch-on="success"
+						switch-label="test"
+						switch-on-label="<span class='glyphicon glyphicon-ok'></span>"
+						switch-off-label="<span class='glyphicon glyphicon-remove'></span>"
+						/>
+
+					<select
+						class="form-control"
+						ng-model="chart[option.name]"
+						ng-switch-when="select"
+						ng-options="v.name group by v.group for v in option.values"
+					>
+						<option value="">Choose chart type...</option>
+					</select>
+				</td>
+			</tr>
+		</table>
+	</script>
+{% endblock %}

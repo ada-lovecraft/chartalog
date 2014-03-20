@@ -1,0 +1,27 @@
+{
+  "name": "Chartalog",
+  "version": "",
+  "dependencies": {
+    "angular": "1.2.8",
+    "angular-resource": "latest",
+    "angular-cookies": "latest",
+    "angular-mocks": "latest",
+    "angular-route": "latest",
+    "bootstrap": "3.0.3",
+    "angular-bootstrap": "0.10.0",
+    "angular-ui-router": "#master",
+    "d3": "~3.4.3",
+    "nvd3": "~1.1.15-beta",
+    "angularjs-nvd3-directives": "~0.0.5-beta",
+    "jquery": "~2.1.0",
+    "angular-bootstrap-switch": "~0.2.1",
+    "font-awesome": "~4.0.3"
+  },
+  "resolutions": {
+    "angular": "1.2.14",
+    "nvd3": "~1.1.15-beta",
+    "d3": "~3.4.3",
+    "jquery": "~2.1.0",
+    "bootstrap": "3.0.3"
+  }
+}

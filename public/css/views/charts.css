@@ -1,0 +1,31 @@
+
+.no-padding .panel-body {
+	padding: 0;
+}
+
+.has-switch {
+	max-height: 34px;
+}
+
+.tab-content {
+	height: 100%;
+}
+
+accordion .panel-group{
+	margin-top: 10px;
+}
+
+accordion .table {
+	margin-bottom: 0;
+}
+
+accordion .table>tbody>tr>td:first-child {
+	vertical-align: middle;
+	font-weight: bold;
+	text-align: right;
+	width: 30%;
+}
+
+.navbar-fixed-bottom .navbar-form {
+	margin: 0;
+}
