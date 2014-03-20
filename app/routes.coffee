@@ -1,14 +1,26 @@
-"use strict"
+console.log(__dirname);
+authorization = require("./routes/middlewares/authorization")
+articles = require("./controllers/articles")
+charts = require("./controllers/charts")
+users = require("./controllers/users")
+index = require("./controllers/index")
+module.exports = (app,passport) ->
+  ###
+  hasAuthorization = (req, res, next) ->
+    return res.send(401, "User is not authorized") if req.article.user.id isnt req.user.id
+    next()
 
-# User routes use users controller
-users = require("../controllers/users")
-module.exports = (app, passport) ->
-  app.get "/signin", users.signin
-  app.get "/signup", users.signup
-  app.get "/signout", users.signout
-  app.get "/users/me", users.me
-  
-  # Setting up the users api
+  # Articles API
+  app.get "api/articles", articles.all
+  app.post "api/articles", authorization.requiresLogin, articles.create
+  app.get "api/articles/:articleId", articles.show
+  app.put "api/articles/:articleId", authorization.requiresLogin, hasAuthorization, articles.update
+  app.del "api/articles/:articleId", authorization.requiresLogin, hasAuthorization, articles.destroy
+
+  # Finish with setting up the articleId param
+  app.param "articleId", articles.article
+
+  # User API# Setting up the users api
   app.post "/users", users.create
   
   # Setting up the userId param
@@ -28,6 +40,7 @@ module.exports = (app, passport) ->
     ]
     failureRedirect: "/signin"
   ), users.signin
+
   app.get "/auth/facebook/callback", passport.authenticate("facebook",
     failureRedirect: "/signin"
   ), users.authCallback
@@ -68,4 +81,6 @@ module.exports = (app, passport) ->
   app.get "/auth/linkedin/callback", passport.authenticate("linkedin",
     failureRedirect: "/siginin"
   ), users.authCallback
-  return
+  ###
+  app.get "*", (req, res) ->
+    res.sendfile './public/views/index.html'

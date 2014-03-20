@@ -1,3 +1,70 @@
-<section data-ng-controller="IndexController">
-	<h1>This is the home view</h1>
-</section>
+<!doctype html>
+<html ng-app="chartalog">
+	<head>
+	    <meta charset="utf-8">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+	    <title>{{title}} - {{appName}}</title>
+	    <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+	    <link href="/img/icons/favicon.ico" rel="shortcut icon" type="image/x-icon">
+
+	    <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.min.css">
+	    <link rel="stylesheet" href="/lib/nvd3/nv.d3.min.css">
+	    <link rel="stylesheet" href="/lib/bootstrap-switch/build/css/bootstrap3/bootstrap-switch.min.css">
+	    <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+	    
+	    <link rel="stylesheet" href="/css/common.css">
+
+	    <link rel="stylesheet" href="/css/views/charts.css">
+
+		<!--[if lt IE 9]>
+		    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+
+	</head>
+	<body>
+		<header ui-view="header" class="navbar navbar-inverse navbar-fixed-top"></header>
+		<div class="content" ui-view="content"></div>
+        <footer class="navbar navbar-inverse navbar-fixed-bottom"  ui-view="footer" data-role="navigation"></footer>
+
+        <!-- Angular JS -->
+		<script type="text/javascript" src="/lib/jquery/dist/jquery.min.js"></script>
+		<script type="text/javascript" src="/lib/angular/angular.js"></script>
+		<script type="text/javascript" src="/lib/angular-cookies/angular-cookies.min.js"></script>
+		<script type="text/javascript" src="/lib/angular-resource/angular-resource.min.js"></script>
+		<script type="text/javascript" src="/lib/angular-ui-router/release/angular-ui-router.js"></script>
+
+		<!-- Angular UI -->
+		<script type="text/javascript" src="/lib/angular-bootstrap/ui-bootstrap.js"></script>
+		<script type="text/javascript" src="/lib/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+
+		<!-- NV/D3 -->
+		<script type="text/javascript" src="/lib/d3/d3.min.js"></script>
+		<script type="text/javascript" src="/lib/nvd3/nv.d3.min.js"></script>
+		<script type="text/javascript" src="/lib/angularjs-nvd3-directives/dist/angularjs-nvd3-directives.js"></script>
+
+		<!-- External Applications -->
+		<script type="text/javascript" src="/lib/bootstrap-switch/build/js/bootstrap-switch.min.js"></script>
+		<script type="text/javascript" src="/lib/angular-bootstrap-switch/dist/angular-bootstrap-switch.min.js"></script>
+
+		<!-- Application Init -->
+		<script type="text/javascript" src="/js/app.js"></script>
+		<script type="text/javascript" src="/js/config.js"></script>
+		<script type="text/javascript" src="/js/directives.js"></script>
+		<script type="text/javascript" src="/js/filters.js"></script>
+
+		<!-- Application Services -->
+		<script type="text/javascript" src="/js/services/global.js"></script>
+		<script type="text/javascript" src="/js/services/chart-globals.js"></script>
+
+		<!-- Application Controllers -->
+		<script type="text/javascript" src="/js/controllers/articles.js"></script>
+		<script type="text/javascript" src="/js/controllers/index.js"></script>
+		<script type="text/javascript" src="/js/controllers/chart.js"></script>
+		<script type="text/javascript" src="/js/controllers/header.js"></script>
+		<script type="text/javascript" src="/js/init.js"></script>
+    </body>
+</html>
+

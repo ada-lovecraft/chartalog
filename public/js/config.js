@@ -4,35 +4,50 @@
 angular.module('chartalog').config(['$stateProvider', '$urlRouterProvider',
   function($stateProvider, $urlRouterProvider) {
     // For unmatched routes:
-    $urlRouterProvider.otherwise('/');
+    $urlRouterProvider.otherwise('/chart/create');
 
     // states for my app
     $stateProvider
-      .state('all articles', {
+      .state('root', {
+        abstract: true,
+        url: '',
+        views: {
+          'header': {
+            templateUrl: 'views/header.html',
+            controller: 'HeaderController'
+          },
+          'footer': {
+            templateUrl: 'views/footer.html',
+            controller: 'HeaderController'
+          },
+        }
+      })
+      .state('root.articles', {
         url: '/articles',
         templateUrl: 'views/articles/list.html'
     })
-      .state('create article', {
+      .state('root.createArticle', {
         url: '/articles/create',
         templateUrl: 'views/articles/create.html'
     })
-      .state('edit article', {
+      .state('root.editArticle', {
         url: '/articles/:articleId/edit',
         templateUrl: 'views/articles/edit.html'
     })
-      .state('article by id', {
+      .state('root.article', {
         url: '/articles/:articleId',
         templateUrl: 'views/articles/view.html'
     })
-      .state('chart creator', {
+      .state('root.createChart', {
         url: '/chart/create',
-        templateUrl: 'views/chart/create.html'
+        views: {
+          'content@': {
+            templateUrl: 'views/chart/create.html'
+          }
+        }
+        
     })
-      .state('home', {
-        url: '/',
-        templateUrl: 'views/index.html'
-    });
-}
+  }
 ]);
 
 //Setting HTML5 Location Mode

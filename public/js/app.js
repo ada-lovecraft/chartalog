@@ -6,3 +6,4 @@ var chartalog = angular.module('chartalog', ['ngCookies', 'ngResource', 'ui.boot
 angular.module('chartalog.system', []);
 angular.module('chartalog.chart', []);
 angular.module('chartalog.articles', []);
+
